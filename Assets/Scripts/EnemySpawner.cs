@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private float timer = 1f;
+    [SerializeField] private float timer = 3f;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private bool canSpawn = true;
-    [SerializeField] public GameObject player;
+    [SerializeField] private int enemiesSpawned = 0;
    
     
 
@@ -16,14 +16,9 @@ public class EnemySpawner : MonoBehaviour
     {
         StartCoroutine(Spawner());            
     }
+    
 
-    private void FixedUpdate()
-    {
-        if(GameManager.instance.enemyCounter <= 1)
-        {
-            canSpawn = false;
-        }
-    }
+   
     private IEnumerator Spawner()       //Spawner that spawns enemy based on timer
     {
         WaitForSeconds wait = new WaitForSeconds(timer);
@@ -33,8 +28,7 @@ public class EnemySpawner : MonoBehaviour
             yield return wait;
             Instantiate(enemyPrefab, transform.position, Quaternion.identity); //Create enemy
             
-           
-
+            
             
         }
         
